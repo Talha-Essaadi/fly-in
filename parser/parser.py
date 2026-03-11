@@ -79,7 +79,18 @@ class MapParser:
 
         if start is None or end is None:
             raise ParserError("Map must contain start_hub and end_hub")
-
+        # if zones[start].zone_type == "blocked":
+        #     raise ParserError("Start hub cannot be blocked")
+        # if zones[end].zone_type == "blocked":
+        #     raise ParserError("End hub cannot be blocked")
+        # if zones[start].zone_type == "restricted":
+        #     raise ParserError("Start hub cannot be restricted")
+        # if zones[end].zone_type == "restricted":
+        #     raise ParserError("End hub cannot be restricted")
+        if zones[start].max_drones < nb_drones:
+            raise ParserError("Start hub max_drones must be at least nb_drones")
+        if zones[end].max_drones < nb_drones:
+            raise ParserError("End hub max_drones must be at least nb_drones")
         return MapData(
             nb_drones=nb_drones,
             drones= [Drone(i+1, start) for i in range(nb_drones)],
@@ -104,7 +115,7 @@ class MapParser:
 
     def _parse_zone(self, line: str, line_number: int) -> Zone:
 
-        pattern = r":\s*(\w+)\s+(\d+)\s+(\d+)(?:\s*\[(.*)\])?"
+        pattern = r":\s*(\w+)\s+(\d+)\s+(\d+)(?:\s*\[(.*?)\])?$"
         match = re.search(pattern, line)
 
         if not match:
@@ -139,7 +150,7 @@ class MapParser:
         zones: Dict[str, Zone],
     ) -> Connection:
 
-        pattern = r"connection:\s*(\w+)-(\w+)(?:\s*\[(.*)\])?"
+        pattern = r"connection:\s*(\w+)-(\w+)(?:\s*\[(.*?)\])?$"
         match = re.search(pattern, line)
 
         if not match:

@@ -35,6 +35,7 @@ Build graph objects
 
 # Knowledge:
 1. Multi-Agent Pathfinding (MAPF)
+2. Learn Dijkstra and implement it
 
 # Questions:
 1. can the coordomaite be negative
@@ -44,7 +45,7 @@ for connections) must be syntactically valid.
 
 3. explain this code:
 ```py
-pattern = r"connection:\s*(\w+)-(\w+)(?:\s*\[(.*)\])?"
+pattern = r""
 match = re.search(pattern, line)
 
 if not match:

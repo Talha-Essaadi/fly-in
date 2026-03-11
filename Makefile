@@ -1,7 +1,7 @@
 PYTHON		= python3
 PIP			= pip
 MAIN		= main.py
-MAP			?= maps/easy/01_linear_path.txt
+MAP			?= maps/hard/02_capacity_hell.txt
 
 
 install:
