@@ -83,10 +83,6 @@ class MapParser:
             raise ParserError("Start hub cannot be blocked")
         if zones[end].zone_type == "blocked":
             raise ParserError("End hub cannot be blocked")
-        if zones[start].max_drones < nb_drones:
-            raise ParserError("Start hub max_drones must be at least nb_drones")
-        if zones[end].max_drones < nb_drones:
-            raise ParserError("End hub max_drones must be at least nb_drones")
         for zone in zones.values():
             for conn in connections:
                 if conn.zone1 == zone.name or conn.zone2 == zone.name:
@@ -115,7 +111,7 @@ class MapParser:
 
     def _parse_zone(self, line: str, line_number: int) -> Zone:
 
-        pattern = r":\s*(\w+)\s+(\d+)\s+(\d+)(?:\s*\[(.*?)\])?$"
+        pattern = r":\s*(\w+)\s+(-?\d+)\s+(-?\d+)(?:\s*\[(.*?)\])?$"
         match = re.search(pattern, line)
 
         if not match:
@@ -180,9 +176,7 @@ class MapParser:
             if "=" not in item:
                 raise ParserError(f"Invalid metadata {item} (line {line_number})")
 
-            key, value = item.split("=")
-            if key not in {"zone", "color", "max_drones", "max_link_capacity"}:
-                raise ParserError(f"Unknown metadata key {key} (line {line_number})")
+            key, value = item.split("=", 1)
             if not key or not value:
                 raise ParserError(f"Invalid metadata syntax (line {line_number})")
             result[key] = value
