@@ -5,11 +5,11 @@ MAP			?= maps/hard/02_capacity_hell.txt
 
 
 install:
-	$(PIP) install --upgrade pip
-	$(PIP) install -r requirements.txt
+	uv add -r requirements.txt
+	uv sync
 
 run:
-	$(PYTHON) $(MAIN) $(MAP)
+	uv run $(PYTHON) $(MAIN) $(MAP)
 
 debug:
 	$(PYTHON) -m pdb $(MAIN) $(MAP)

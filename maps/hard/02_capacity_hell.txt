@@ -1,5 +1,5 @@
 # Hard Level 2: Extreme capacity constraints with timing challenges
-nb_drones: 12
+nb_drones: 1
 
 start_hub: start 0 0 [color=green max_drones=12]
 hub: gate1 1 0 [color=orange max_drones=1]
@@ -36,7 +36,7 @@ connection: restricted_tunnel2-restricted_tunnel3
 connection: restricted_tunnel3-convergence
 
 # Priority bypass (fast but limited capacity)
-connection: waiting_area1-priority_bypass1
+# connection: waiting_area1-priority_bypass1
 connection: priority_bypass1-priority_bypass2
 connection: priority_bypass2-convergence
 

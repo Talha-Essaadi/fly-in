@@ -16,8 +16,14 @@ class Zone:
     y: int
     zone_type: str = "normal"
     color: str | None = None
+    show_info: bool = False
     max_drones: int = 1
     connections: list[Connection] = field(default_factory=list)
+
+@dataclass
+class Path:
+    path: list[list]
+    max_flow: int
 
 
 
@@ -25,6 +31,8 @@ class Zone:
 class Drone:
     id: int
     zone: str
+    pos: tuple[int, int] | None = None
+    t: float = 0.0
     path: list[str] = field(default_factory=list)
 
 

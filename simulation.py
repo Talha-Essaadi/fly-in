@@ -1,6 +1,7 @@
 from models import Zone, Connection, MapData, Drone
 from visualization import Visualizer
 from typing import Dict, List
+from pathfinding import Pathfinding
 
 class Simulation:
     """Main simulation engine."""
@@ -16,6 +17,10 @@ class Simulation:
 
     def run(self):
         """Run the full simulation until all drones reach the end zone."""
-        # print("zones :", self.zones)
+        pathfinding = Pathfinding(self.map_data)
+        paths = pathfinding.get_all_paths()
+        print(paths)
+        # for drone in self.drones:
+        #     drone.path = paths[drone.zone]
         visualizer = Visualizer(self.map_data)
         visualizer.run()
