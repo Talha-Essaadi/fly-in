@@ -11,7 +11,7 @@ class Visualizer:
         pygame.init()
         info = pygame.display.Info()
         self.width = info.current_w / 2
-        self.height = info.current_h
+        self.height = info.current_h - 100
         self.screen = pygame.display.set_mode((self.width, self.height))
         pygame.display.set_caption("fly-in Simulation")
         self.clock = pygame.time.Clock()
@@ -26,9 +26,11 @@ class Visualizer:
         self.raduis = ((self.rect_w // 2) if (self.rect_w < self.rect_h) else (self.rect_h // 2)) * 0.7
         self.running = True
         self.pos = None
-        self.speed = 0.002
-        self.initialize_map()
+        self.speed = 0.05
         self.pause = False
+        self.start_zone = map_data.start
+        self.end_zone = map_data.end
+        self.initialize_map()
         self.colors = {
             "red": (255, 0, 0),
             "green": (0, 255, 0),
@@ -58,7 +60,7 @@ class Visualizer:
         self.pause = False
         for i, drone in enumerate(self.drones):
             drone.id = i + 1
-            drone.zone = "gate1"
+            drone.zone = self.start_zone
             drone.t = 0.0
             drone.pos = self._compute_center(self.zones[drone.zone].x, self.zones[drone.zone].y)
 
@@ -122,21 +124,42 @@ class Visualizer:
         for drone in self.drones:
             center = drone.pos
             pygame.draw.circle(self.screen, self.colors["red"], center, self.raduis * 0.4)
-            # drone.zone = "gate1"
+            pygame.draw.circle(self.screen, self.colors["white"], center, self.raduis * 0.4, width=1)
 
-    def move_drones(self, zone_name: str) -> None:
-        drone = self.drones[0]
-        current_zone = self.zones[drone.zone]
-        target_zone = self.zones[zone_name]
-        x1, y1 = self._compute_center(current_zone.x, current_zone.y)
-        x2, y2 = self._compute_center(target_zone.x, target_zone.y)
-        if drone.t != 1:
-            drone.t += self.speed
-            if drone.t > 1:
-                drone.t = 1
-            x = x1 + (x2 - x1) * drone.t
-            y = y1 + (y2 - y1) * drone.t
-            drone.pos = (x, y)
+
+
+    def get_target_zone(self, drone):
+        index = drone.path.index(drone.zone) + 1
+        return drone.path[index]
+        
+
+    def move_drones(self) -> None:
+        for drone in self.drones:
+            if (drone.zone == self.end_zone):
+                continue
+            zone_name = self.get_target_zone(drone)
+            drone.target_zone = zone_name
+            if drone.id != 1:
+                drone1 = self.drones[drone.id - 2]
+                if zone_name == drone1.target_zone and drone1.zone != self.end_zone:
+                    continue
+                
+            current_zone = self.zones[drone.zone]
+            target_zone = self.zones[zone_name]
+            x1, y1 = self._compute_center(current_zone.x, current_zone.y)
+            x2, y2 = self._compute_center(target_zone.x, target_zone.y)
+            if drone.t == 1:
+                time.sleep(0.1)
+                drone.zone = zone_name
+                drone.t = 0.0
+                continue
+            if drone.t != 1:
+                drone.t += self.speed
+                if drone.t > 1:
+                    drone.t = 1
+                x = x1 + (x2 - x1) * drone.t
+                y = y1 + (y2 - y1) * drone.t
+                drone.pos = (x, y)
 
 
     def run(self):
@@ -161,9 +184,8 @@ class Visualizer:
                 self.screen.fill((0, 0, 0))
                 self.draw_connections()
                 self.draw_zones()
+                self.move_drones()
                 self.draw_drones()
-                # print(self.drones[0].pos)
-                self.move_drones("waiting_area1")
                 self._display_info()
                 self.clock.tick(60)
                 pygame.display.flip()

@@ -12,16 +12,16 @@ hub: dist_gate3 1 2 [color=orange max_drones=1]
 hub: maze_trap1 2 2 [color=red]
 hub: maze_trap2 3 2 [color=red]
 hub: maze_loop1 2 1 [zone=restricted color=purple]
-hub: maze_loop2 3 5 [zone=restricted color=purple]
-hub: maze_loop3 4 5 [zone=restricted color=purple]
+hub: maze_loop2 3 1 [zone=restricted color=purple]
+hub: maze_loop3 4 1 [zone=restricted color=purple]
 hub: maze_loop4 4 2 [zone=restricted color=purple]
 hub: maze_correct 2 0 [color=blue]
 
 # Layer 3: Capacity nightmare section
 hub: bottleneck1 3 0 [color=yellow max_drones=2]
 hub: bottleneck2 4 0 [color=yellow max_drones=1]
-hub: overflow1 3 1 [zone=restricted color=orange max_drones=3]
-hub: overflow2 4 1 [zone=restricted color=orange max_drones=3]
+hub: overflow1 3 3 [zone=restricted color=orange max_drones=3]
+hub: overflow2 4 3 [zone=restricted color=orange max_drones=3]
 
 # Layer 4: Priority puzzle with traps
 hub: priority_hub 5 0 [zone=priority color=cyan max_drones=4]
@@ -33,8 +33,8 @@ hub: priority_correct 6 0 [zone=priority color=cyan max_drones=3]
 # Layer 5: Multi-path convergence hell
 hub: conv_restricted1 7 0 [zone=restricted color=brown max_drones=2]
 hub: conv_restricted2 8 0 [zone=restricted color=brown max_drones=2]
-hub: conv_normal1 7 5 [color=blue max_drones=3]
-hub: conv_normal2 8 5 [color=blue max_drones=3]
+hub: conv_normal1 7 2 [color=blue max_drones=3]
+hub: conv_normal2 8 2 [color=blue max_drones=3]
 hub: conv_priority1 7 3 [zone=priority color=lime max_drones=2]
 hub: conv_priority2 8 1 [zone=priority color=lime max_drones=2]
 

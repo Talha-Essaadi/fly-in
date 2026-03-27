@@ -22,10 +22,10 @@ hub: maze_trap_a2 2 1 [color=purple]
 hub: maze_trap_a3 3 1 [color=purple]
 hub: maze_dead_a 4 1 [color=black]
 
-hub: maze_trap_b1 1  5 [color=purple]
-hub: maze_trap_b2 2 5 [color=purple]
-hub: maze_trap_b3 3  5 [color=purple]
-hub: maze_dead_b 4 5 [color=black]
+hub: maze_trap_b1 1 3 [color=purple]
+hub: maze_trap_b2 2 3 [color=purple]
+hub: maze_trap_b3 3 3 [color=purple]
+hub: maze_dead_b 4 3 [color=black]
 
 hub: maze_loop1 1 2 [zone=restricted color=brown]
 hub: maze_loop2 2 2 [zone=restricted color=brown]
@@ -43,9 +43,9 @@ hub: micro_gate3 8 0 [color=orange max_drones=1]
 hub: overflow_hell1 6 1 [zone=restricted color=maroon max_drones=2]
 hub: overflow_hell2 7 1 [zone=restricted color=maroon max_drones=2]
 hub: overflow_hell3 8 1 [zone=restricted color=maroon max_drones=2]
-hub: overflow_hell4 6  5 [zone=restricted color=maroon max_drones=2]
-hub: overflow_hell5 7 5 [zone=restricted color=maroon max_drones=2]
-hub: overflow_hell6 8 5 [zone=restricted color=maroon max_drones=2]
+hub: overflow_hell4 6 3 [zone=restricted color=maroon max_drones=2]
+hub: overflow_hell5 7 2 [zone=restricted color=maroon max_drones=2]
+hub: overflow_hell6 8 2 [zone=restricted color=maroon max_drones=2]
 
 # === LAYER 3: The False Hope Section ===
 # Priority zones that lead to more traps
@@ -58,9 +58,9 @@ hub: priority_trap1 9 1 [zone=priority color=gold]
 hub: priority_trap2 10 1 [zone=priority color=gold]
 hub: priority_dead 11 1 [color=black]
 
-hub: priority_trap3 9 5 [zone=priority color=gold]
-hub: priority_trap4 10 5 [zone=priority color=gold]
-hub: priority_dead2 11 5 [color=black]
+hub: priority_trap3 9 2 [zone=priority color=gold]
+hub: priority_trap4 10 2 [zone=priority color=gold]
+hub: priority_dead2 11 2 [color=black]
 
 # === LAYER 4: The Convergence Hell ===
 # Multiple restricted paths that must merge
@@ -72,9 +72,9 @@ hub: conv_restricted4 12 0 [zone=restricted color=darkred max_drones=1]
 hub: conv_restricted5 13 0 [zone=restricted color=darkred max_drones=1]
 hub: conv_restricted6 14 0 [zone=restricted color=darkred max_drones=1]
 
-hub: conv_restricted7 12 5 [zone=restricted color=darkred max_drones=1]
-hub: conv_restricted8 13 5 [zone=restricted color=darkred max_drones=1]
-hub: conv_restricted9 14 4 [zone=restricted color=darkred max_drones=1]
+hub: conv_restricted7 12 3 [zone=restricted color=darkred max_drones=1]
+hub: conv_restricted8 13 3 [zone=restricted color=darkred max_drones=1]
+hub: conv_restricted9 14 3 [zone=restricted color=darkred max_drones=1]
 
 # === LAYER 5: The Final Gauntlet of Doom ===
 hub: final_merge 15 0 [color=violet max_drones=5]

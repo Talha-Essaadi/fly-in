@@ -4,6 +4,7 @@ from models import Path
 class Pathfinding:
     def __init__(self, mapData):
         self.map = mapData
+        self.nb_drones = mapData.nb_drones
         self.zones = mapData.zones
         self.connections = mapData.connections
         self.start = mapData.start
@@ -49,8 +50,20 @@ class Pathfinding:
     def compute_flows(self, paths):
         computed_flow = []
         for path in paths:
-            computed_flow.append(Path(path=path, max_flow=self.compute_flow(path)))
+            computed_flow.append(Path(path=path, max_flow=self.compute_flow(path), turn=self.compute_turn(path)))
         return computed_flow
+
+
+    def compute_turn(self, path):
+        turns = [] 
+        for zone1, zone2 in zip(path, path[1:]):
+            cnn = self.map_connections[tuple(sorted([zone1, zone2]))]
+            max_drones = self.zones[zone2].max_drones
+            flow = cnn.max_link_capacity if cnn.max_link_capacity < max_drones else max_drones
+            turns.append(self.nb_drones // flow + (1 if self.nb_drones % flow > 0 else 0))
+        return turns
+
+
 
 
     def compute_flow(self, path):

@@ -24,6 +24,7 @@ class Zone:
 class Path:
     path: list[list]
     max_flow: int
+    turn: int = 0
 
 
 
@@ -31,6 +32,7 @@ class Path:
 class Drone:
     id: int
     zone: str
+    target_zone: str | None = None
     pos: tuple[int, int] | None = None
     t: float = 0.0
     path: list[str] = field(default_factory=list)
